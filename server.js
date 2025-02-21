@@ -1,17 +1,15 @@
-// server.js
 const express = require('express');
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
+const host = '0.0.0.0';
 
-// Enable CORS to allow React frontend to communicate with the backend
-const cors = require('cors');
-app.use(cors());
 
-// Sample route
+app.use(express.static('public'));
+
 app.get('/api', (req, res) => {
-  res.json({ message: 'Coming Soon.... FR' });
+  res.send({ message: 'Hello from Express!' });
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+app.listen(port, host, () => {
+  console.log(`Server running on http://${host}:${port}`);
 });
