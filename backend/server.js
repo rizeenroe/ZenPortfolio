@@ -1,28 +1,29 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+
 const app = express();
-const port = process.env.PORT || 8000
+const PORT = process.env.PORT || 8000;
 
 // Middleware
 app.use(cors());
-app.use(express.json()); // to handle POST requests
+app.use(express.json());
 
-// Example GET route
+// Root route (Message displayed at the root)
 app.get('/', (req, res) => {
-  res.status(200).send({
-    message: "Hello from the backend"
+  res.send({ message: 'Hello from the backend!' });
+});
+
+// Serve React frontend if needed (optional, for production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
   });
+}
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-// Example POST route
-app.post('/api/data', (req, res) => {
-  const { name } = req.body;
-  res.json({ message: `Hello, ${name}` });
-});
-
-// Vercel expects a handler to export for serverless functions
-module.exports = (req, res) => {
-  app(req, res);
-};
-
-app.listen(port , ()=> console.log('> Server is up and running on port : ' + port))
