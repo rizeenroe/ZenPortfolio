@@ -56,9 +56,6 @@ const Home = () => {
 
    return(
       <main>
-
-         {/* <ThreeDScene /> */}
-
          <section className="homeProfile" id="home">
             <div className='homeContainer'>
                <div className='homeProfileInfo'>
