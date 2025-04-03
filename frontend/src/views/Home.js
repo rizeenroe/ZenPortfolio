@@ -464,6 +464,7 @@ const Home = () => {
             </section>
          </div>
          
+         
          <div
             className={`profileWrapper ${visibleWrappers.includes(3) ? "profileWrapper--visible" : ""}`}
             ref={(el) => (wrappersRef.current[3] = el)}
