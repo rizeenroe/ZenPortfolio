@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState, useLayoutEffect, use } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Links } from 'react-router-dom';
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './views/Home';
 import './App.css';
 
@@ -7,7 +7,6 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
   const navbarRef = useRef(null);
   const openButtonRef = useRef(null);
-  const navLinks = useRef(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 700px)");
@@ -16,12 +15,6 @@ function App() {
     updateNavbar(mediaQuery); 
     
     mediaQuery.addEventListener('change', updateNavbar);
-
-    // navLinks.forEach(Links => {
-    //   Links.addEventListener('click', () => {
-    //     closeSidebar();
-    //   })
-    // });
 
     return () => {
       mediaQuery.removeEventListener('change', updateNavbar);

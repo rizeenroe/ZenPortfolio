@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ThreeDScene from './rotatingCube';
 
 const projects = [
    {
@@ -43,6 +42,7 @@ const projects = [
 const Home = () => {
    const [modalOpen, setModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState({});
+   const [isSubmitted, setIsSubmitted] = useState(false);
 
    const openModal = (project) => {
       setModalContent(project);
@@ -53,6 +53,19 @@ const Home = () => {
       setModalOpen(false);
    };
 
+   const handleSubmit = (e) => {
+      e.preventDefault(); 
+
+      setIsSubmitted(true);
+
+      setTimeout(() => {
+          document.getElementById("contactForm").submit();
+      }, 1000);
+
+      setTimeout(() => {
+         setIsSubmitted(false);
+     }, 3000);
+  };
 
    return(
       <main>
@@ -406,28 +419,69 @@ const Home = () => {
 
 
          <section className='contactProfile' id='contacts'>
-            <form action={"mailto:rizeenroe@zenportfolio.net"} method="post" enctype="text/plain">
-               <div className='contactContainer'>
-               <div>
-                  <h1 id='profileTitle'>Contact</h1>
-               </div>
-               <div className='contactListContainer'>
-                  <div className='contactProfileBoxes'>
-                     <input className='senderName' placeholder='Your Name' />
-                  </div>
-                  <div className='contactProfileBoxes'>
-                     <input className='senderEmail' placeholder='Your Email' />
-                  </div>
-                  <div className='contactProfileBoxes'>
-                     <textarea className='senderMessage' placeholder='Your Message'></textarea>
-                  </div>
-                  <div className='contactProfileBoxes' id='contactSendContainer' style={{ gridArea: 'contactBox-5' }}>
-                     <button className='contactSendButton' value="Send">Send</button>
-                  </div>
-               </div>
-            </div>
-            </form>
             
+               <div className='contactContainer'>
+                  <form 
+                     id="contactForm"
+                     action="mailto:rizeenroe@zenportfolio.net" 
+                     method="post" 
+                     encType="text/plain"
+                     onSubmit={handleSubmit}
+                  >
+                     <div>
+                        <h1 id='profileTitle'>Contact</h1>
+                     </div>
+                     <div className='contactListContainer'>
+                        <div className='contactProfileBoxes'>
+                           <input 
+                                 className='senderName' 
+                                 name="Name" 
+                                 placeholder='Your Name' 
+                                 required
+                           />
+                        </div>
+                        <div className='contactProfileBoxes'>
+                           <input 
+                                 className='senderEmail' 
+                                 name="Email" 
+                                 type="email" 
+                                 placeholder='Your Email' 
+                                 required
+                           />
+                        </div>
+                        <div className='contactProfileBoxes'>
+                            <input 
+                                className='senderSubject' 
+                                name="Subject" 
+                                placeholder='Subject' 
+                                required
+                            />
+                        </div>
+                        <div className='contactProfileBoxes'>
+                           <textarea 
+                                 className='senderMessage' 
+                                 name="Message" 
+                                 placeholder='Your Message' 
+                                 required
+                           ></textarea>
+                        </div>
+                        <div className='contactProfileBoxes' id='contactSendContainer' style={{ gridArea: 'contactBox-5' }}>
+                           <input 
+                                 className='contactSendButton' 
+                                 type="submit" 
+                                 value="Send"
+                           />
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            
+            {/* Pop-up confirmation message */}
+            {isSubmitted && (
+                <div className="popup">
+                    <p>Message Sent Successfully!</p>
+                </div>
+            )}
          </section>
 
 
