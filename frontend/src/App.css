@@ -88,11 +88,8 @@ nav a.accent-link{
 }
 
 
-section{
-  scroll-snap-align: start;
-  
-}
 .profileWrapper {
+  scroll-snap-align: start;
   transform: translateY(20px);
   opacity: 0;
   transition: transform 1s ease, opacity 1s ease;
