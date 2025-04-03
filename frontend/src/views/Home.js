@@ -40,7 +40,7 @@ const projects = [
    },
    {
       id: 6,
-      title: "Project 6",
+      title: "",
       image: "/images/projects/coming-soon.png",
       description: "Coming Soon",
    },
