@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from "emailjs-com";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const projects = [
    {
@@ -7,6 +8,7 @@ const projects = [
       title: "Twitter Clone",
       image: "/images/projects/twitter-clone.png",
       description: "Twitter Clone - A full-stack social media app.",
+      link: 'https://zz-xi.vercel.app/'
    },
    {
       id: 2,
@@ -44,6 +46,7 @@ const Home = () => {
    const [modalOpen, setModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState({});
    const [isSubmitted, setIsSubmitted] = useState(false);
+   const [captchaValue, setCaptchaValue] = useState(null);
    const [formData, setFormData] = useState({
        name: "",
        email: "",
@@ -68,8 +71,11 @@ const Home = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-
       console.log("🚀 Sending email with:", formData);
+      if (!captchaValue) {
+         alert("Please complete the CAPTCHA");
+         return;
+      }
 
       emailjs.send(
          process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -86,6 +92,10 @@ const Home = () => {
       setTimeout(() => setIsSubmitted(false), 3000);
    };
 
+   const handleCaptchaChange = (value) => {
+      setCaptchaValue(value);
+   };
+
    return(
       <main>
          <section className="homeProfile" id="home">
@@ -95,29 +105,34 @@ const Home = () => {
                      {/* <h1 className='homeTitle'>Hi,<br></br>I'am <span className='titleName'>Rizeen Roe</span><br></br>Full Stack Developer</h1> */}
                      <h1 className='homeTitle' id='welcomeMessage'>Hi, I'am <br></br><span className='titleName'>Rizeen Roe Peralta</span><br></br>Full Stack Developer</h1>
                   </div>
-                  <div className='homeProfileBoxes' id='contactButtonContainer' style={{ gridArea: 'profileBox-2' }}>
+                  <div className='homeProfileBoxes' id='contactButtonContainer'>
                      <a href='#contacts' id='profileContactButton'>
                         <button id='contactButton' >
                            <span>Contact</span>
                         </button>
                      </a>
                   </div>
-                  <div className='homeProfileBoxes' id='socials' style={{ gridArea: 'profileBox-3' }}>
-                     <a href='https://www.linkedin.com/in/rizeenroeperalta/' className='homeSocial-icon'>
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                           <path fill="#0288D1" d="M42,37c0,2.762-2.238,5-5,5H11c-2.761,0-5-2.238-5-5V11c0-2.762,2.239-5,5-5h26c2.762,0,5,2.238,5,5V37z"></path><path fill="#FFF" d="M12 19H17V36H12zM14.485 17h-.028C12.965 17 12 15.888 12 14.499 12 13.08 12.995 12 14.514 12c1.521 0 2.458 1.08 2.486 2.499C17 15.887 16.035 17 14.485 17zM36 36h-5v-9.099c0-2.198-1.225-3.698-3.192-3.698-1.501 0-2.313 1.012-2.707 1.99C24.957 25.543 25 26.511 25 27v9h-5V19h5v2.616C25.721 20.5 26.85 19 29.738 19c3.578 0 6.261 2.25 6.261 7.274L36 36 36 36z"></path>
-                        </svg>
-                     </a>
-                     <a href='https://www.youtube.com/@ZenZxnZen' className='homeSocial-icon'>
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                           <path fill="#FF3D00" d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,43.6,31.6,43.2,33.9z"></path><path fill="#FFF" d="M20 31L20 17 32 24z"></path>
-                        </svg>
-                     </a>
-                     <a href='https://github.com/rizeenroe' className='homeSocial-icon'>
-                        <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                           <path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="#fff"/>
-                        </svg>
-                     </a>
+                  <div className='homeProfileBoxes' id='socials'>
+                     <div>
+                        <a href='https://www.linkedin.com/in/rizeenroeperalta/' className='homeSocial-icon'>
+                           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                              <path fill="#0288D1" d="M42,37c0,2.762-2.238,5-5,5H11c-2.761,0-5-2.238-5-5V11c0-2.762,2.239-5,5-5h26c2.762,0,5,2.238,5,5V37z"></path><path fill="#FFF" d="M12 19H17V36H12zM14.485 17h-.028C12.965 17 12 15.888 12 14.499 12 13.08 12.995 12 14.514 12c1.521 0 2.458 1.08 2.486 2.499C17 15.887 16.035 17 14.485 17zM36 36h-5v-9.099c0-2.198-1.225-3.698-3.192-3.698-1.501 0-2.313 1.012-2.707 1.99C24.957 25.543 25 26.511 25 27v9h-5V19h5v2.616C25.721 20.5 26.85 19 29.738 19c3.578 0 6.261 2.25 6.261 7.274L36 36 36 36z"></path>
+                           </svg>
+                        </a>
+                     </div>
+                     <div>
+                        <a href='https://www.youtube.com/@ZenZxnZen' className='homeSocial-icon'>
+                           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                              <path fill="#FF3D00" d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,43.6,31.6,43.2,33.9z"></path><path fill="#FFF" d="M20 31L20 17 32 24z"></path>
+                           </svg>
+                        </a>
+                     </div>
+                     <div>
+                        <a href='https://github.com/rizeenroe' className='homeSocial-icon'>
+                           <svg viewBox="-6.4 -6.4 76.80 76.80" id="i-github" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(5.440000000000001,5.440000000000001), scale(0.83)"><rect x="-6.4" y="-6.4" width="76.80" height="76.80" rx="38.4" fill="#000000" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path stroke-width="0" fill="#ffffff" d="M32 0 C14 0 0 14 0 32 0 53 19 62 22 62 24 62 24 61 24 60 L24 55 C17 57 14 53 13 50 13 50 13 49 11 47 10 46 6 44 10 44 13 44 15 48 15 48 18 52 22 51 24 50 24 48 26 46 26 46 18 45 12 42 12 31 12 27 13 24 15 22 15 22 13 18 15 13 15 13 20 13 24 17 27 15 37 15 40 17 44 13 49 13 49 13 51 20 49 22 49 22 51 24 52 27 52 31 52 42 45 45 38 46 39 47 40 49 40 52 L40 60 C40 61 40 62 42 62 45 62 64 53 64 32 64 14 50 0 32 0 Z"></path> </g></svg>
+                        </a>
+                     </div>
+                     
                   </div>
                </div>
                <div className='homeProfileBoxes' id='profilePicture' style={{ gridArea: 'profileBox-4' }}>
@@ -139,8 +154,8 @@ const Home = () => {
                   ensuring efficient backend logic and dynamic frontend interactions.
                   </p><br></br>
                   <p>
-                  Beyond coding, I'm an avid anime and retro gaming enthusiast,<br></br> 
-                  always on the lookout for new adventures in the tech world and beyond.<br></br> 
+                  Beyond coding, I also like playing video games and reading,<br></br> 
+                  I am always on the lookout for new adventures in the tech world and beyond.<br></br> 
                   My curiosity drives me to constantly learn and innovate, whether it's developing a Discord bot,<br></br>
                   improving network programming skills, or exploring new frameworks.<br></br>               
                   </p><br></br>
@@ -309,8 +324,6 @@ const Home = () => {
                      <div className='skillsBoxes'>
                         <div>
                            <svg
-                              width="800px"
-                              height="800px"
                               viewBox="0 0 512 512"
                               xmlns="http://www.w3.org/2000/svg"
                               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -379,9 +392,7 @@ const Home = () => {
                      </div>
                      <div className='skillsBoxes'>
                         <div>
-                           <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="#fff"/>
-                           </svg>
+                           <svg viewBox="-6.4 -6.4 76.80 76.80" id="i-github" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(5.440000000000001,5.440000000000001), scale(0.83)"><rect x="-6.4" y="-6.4" width="76.80" height="76.80" rx="38.4" fill="#000000" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path stroke-width="0" fill="#ffffff" d="M32 0 C14 0 0 14 0 32 0 53 19 62 22 62 24 62 24 61 24 60 L24 55 C17 57 14 53 13 50 13 50 13 49 11 47 10 46 6 44 10 44 13 44 15 48 15 48 18 52 22 51 24 50 24 48 26 46 26 46 18 45 12 42 12 31 12 27 13 24 15 22 15 22 13 18 15 13 15 13 20 13 24 17 27 15 37 15 40 17 44 13 49 13 49 13 51 20 49 22 49 22 51 24 52 27 52 31 52 42 45 45 38 46 39 47 40 49 40 52 L40 60 C40 61 40 62 42 62 45 62 64 53 64 32 64 14 50 0 32 0 Z"></path> </g></svg>
                         </div>   
                         <div className='skillsBoxesTitle'>
                               <div>
@@ -413,14 +424,17 @@ const Home = () => {
                <div className='projectsListContainer'>
                   {projects.map((project) => (
                      <div
-                     key={project.id}
-                     className="projectsProfileBoxes"
-                     onClick={() => openModal(project)}
+                        key={project.id}
+                        className="projectsProfileBoxes"
+                        onClick={() => openModal(project)}
                      >
                      <div>
                         <img src={project.image} alt={project.title} id='projectsListImage'/>
                      </div>  
-                     <div className='projectInfo'>{project.description}  </div>
+                     <div className='projectInfo'>
+                        
+                        <a href={project.link}>{project.description}  </a>
+                     </div>
                      </div>
                      
                   ))}
@@ -484,6 +498,12 @@ const Home = () => {
                                 onChange={handleChange}
                                 required
                             ></textarea>
+                        </div>
+                        <div className="contactProfileBoxes">
+                           <ReCAPTCHA
+                               sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                               onChange={handleCaptchaChange}
+                           />
                         </div>
                         <div className="contactProfileBoxes" id="contactSendContainer">
                             <input className="contactSendButton" type="submit" value="Send" />

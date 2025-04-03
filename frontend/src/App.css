@@ -143,6 +143,10 @@ nav a.accent-link{
   justify-content: center;
   padding: 14px;
 }
+.homeProfileBoxes svg{
+  height: 100px;
+  width: 100px;
+}
 #welcomeMessage{
   color: white  ;
   align-content: flex-start;
@@ -212,15 +216,19 @@ button:hover {
 }
 .skillsListContainer{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
   max-height: 500px;
+  max-width: 100%;
 }
 .skillsBoxes{
   /* border: 0.5px solid var(--hover-color);   */
   display: flex;
   flex-direction: row;
   height: 100px;
+  min-width: 240px;
 }
 .skillsBoxes svg{
   height: 100px;
@@ -265,8 +273,8 @@ button:hover {
   padding: 0.5rem;
 }
 #projectsListImage{
-  height: 30dvh;
-  width: 20dvw;
+  height: 20dvh;
+  width: 15dvw;
 }
 .projectsProfileBoxes img {
   width: 100%;
