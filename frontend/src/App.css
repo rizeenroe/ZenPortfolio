@@ -1,38 +1,546 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+:root{
+  --primary-color: #11121a;
+  --hover-color: #272832;
+  --accent-color: #0071FF;
+  --text-color: #c9c9c9;
+}
+@keyframes appear{
+  
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+  font-family: Poppins, 'Segoe UI', sans-serif;
+  color: var(--text-color);
+  /* scroll-snap-type: y mandatory; */
+}
+body{
+  min-height: 100dvh;
+  min-height: 100dvh;
+  background-color: var(--primary-color);
+  scroll-behavior: smooth; 
+}
+main{
+  padding: min(5em, 7%);
+}
+main p{
+  margin-top: .35em;
+}
+nav{
+  background-color: var(--primary-color);
+  border-bottom: 1px solid var(--hover-color);
+  position: sticky; /* Make the navbar sticky */
+  top: 0; /* Stick it to the top */
+  z-index: 10;
+  /* width: 100%; */
+}
+nav li{
+  display: flex;
+}
+nav ul{
+  list-style: none;
+  display: flex;
+}
+nav .home-li{
+  margin-right: auto;
+}
+nav a{
+  display: flex;
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 1em 2em;
+}
+nav a:hover{
+  background-color: var(--hover-color);
+}
+nav a.active-link{
+  border-bottom: 2px solid var(--text-color);
+}
+nav a.accent-link{
+  background-color: var(--accent-color);
+}
+#open-sidebar-button{
+  display: none;
+  background: none;
+  border: none;
+  padding: 1em;
+  margin-left: auto;
+  cursor: pointer;
+}
+#close-sidebar-button{
+  display: none;
+  background: none;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+}
+#overlay{
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  display: none;
+}
+
+
+
+  /* .homeProfile{
+    background-color: #0056b3;
+  } */
+/* .aboutProfile{
+  background-color: red;
+} */
+/* .skillsProfile{
+  background-color: white;
+} */
+/* .projectsProfile{
+  background-color: yellow;
+} */
+/* .contactProfile{
+  background-color: green;
+} */
+
+
+
+
+.homeProfile, .aboutProfile , .skillsProfile, .projectsProfile, .contactProfile{
+  padding-top: 25px;
+  padding: 1rem;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+  /* scroll-snap-align: center; */
+  /* animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;   */
+}
+
+.aboutContainer, .skillsContainer, .projectsContainer, .contactContainer{
+  width: 100dvh;
+  justify-content: center ;
+}
+
+#profileTitle{
+  font-size: 90px
+}
+
+
+/* Home */
+.homeContainer{
+  display: flex;
+  flex-direction: row;
+}
+.homeProfileBoxes{
+  /* background-color: #535353;  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+#welcomeMessage{
+  color: white  ;
+  align-content: flex-start;
+  font-size: 90px;
+}
+.titleName{
+  color: rgb(29, 24, 120);
+}
+#contactButtonContainer{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+#contactButton{
+  font-size: 22px; 
+  padding: 26px 45px; 
+  background-color: var(--accent-color);
+  border: none; 
+  border-radius: 18px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+  color: white;
+}
+#profileContactButton{
+  text-decoration: none; 
+}
+#contactButton:hover {
+  background-color: #2e46ff; 
+}
+#socials{
+  align-items: center;
+  justify-content: flex-start;
+}
+#profilePicture{
+  
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* About */
+.aboutProfile{
+  font-size: 20px
+}
+
+
+
+
+
+
+/* Skills */
+.skillsContainer{
+  /* flex-wrap: wrap; */
+}
+.skillsProfileTitle{
+  min-width: 10rem;
+}
+.skillsProfileBoxes{
+  /* background-color: #0071FF;    */
+  /* flex-wrap: wrap; */
+}
+.skillsProfileBoxes img{
+  height: 400px;
+  width: 400px;
+}
+.skillsListContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 500px;
+}
+.skillsBoxes{
+  /* border: 0.5px solid var(--hover-color);   */
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+}
+.skillsBoxes svg{
+  height: 100px;
+  width: 100px;
+}
+.skillsBoxesTitle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+  
+
+
+
+
+/* Porjects */
+/* .projectsContainer{
+  display: grid;
+  grid-template-columns: 500px 500px 500px;
+  grid-template-rows: 300px 300px 300px;
+  gap: 1em;
+  grid-template-areas: 
+    "projectBox-1 projectBox-2 projectBox-3"
+    "projectBox-4 projectBox-5 projectBox-6";
+} */
+.projectsListContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.projectProfileTitle{
+  display: flex;
+  
+}
+.projectsProfileBoxes{
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+#projectsListImage{
+  height: 250px;
+  width: 350px;
+}
+.projectsProfileBoxes img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+.projectInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
   text-align: center;
+  opacity: 0; 
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.projectsProfileBoxes:hover .projectInfo {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+ 
+
+/* image modal */
+.projectsProfileBoxes:hover img {
+  opacity: 0.7;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.modal {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  max-width: 80%;
+  max-height: 80%;
+  animation: zoom 0.6s;
+}
+
+#caption {
   color: white;
+  text-align: center;
+  margin-top: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
+.close:hover {
+  color: #bbb;
+}
+
+/* Animation */
+@keyframes zoom {
   from {
-    transform: rotate(0deg);
+    transform: scale(0);
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(1);
   }
+}
+
+
+
+
+
+
+
+
+
+/* Contact */
+/* .contactContainer {
+  display: grid;
+  grid-template-columns: 700px;
+  grid-template-rows: 100px 100px 100px 500px 100px;
+  gap: 3em; 
+  grid-template-areas: 
+    "contactBox-1"
+    "contactBox-2"
+    "contactBox-3"
+    "contactBox-4"
+    "contactBox-5";
+} */
+.contactContainer{
+  gap: 3em;
+}
+.contactListContainer{
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contactProfileBoxes{
+  /* background-color: #0022ff; */
+  display: flex;
+  align-items: center;
+  padding: 1.5%;
+}
+
+.contactProfileBoxes textarea{
+  height: 400px;
+}
+
+
+
+#contactTitle{
+  font-size: 60px;
+}
+.senderName, .senderEmail{
+  padding: 2%;
+  font-size: 23px;
+}
+.senderName, .senderEmail, .senderMessage{
+  width: 100%;
+  height: 100%;
+  border-radius: 8px; 
+}
+.senderMessage{
+  font-size: 17px;
+  padding: 2%;
+}
+.contactSendContainer {
+  align-items: flex-end;
+}
+#contactSendContainer{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.contactSendButton {
+  font-size: 22px; 
+  padding: 15px 30px; 
+  background-color: var(--accent-color);
+  color: white; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.contactSendButton:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+@media screen and (max-width: 700px) {
+  #open-sidebar-button, #close-sidebar-button{
+    display: block;
+  }
+  nav{
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: min(15em, 100%);
+    z-index: 10;
+    border-left: 1px solid var(--hover-color);
+    transition: right 300ms ease-out;
+    background-image: '/images/image-removebg-preview.png';
+  }
+  nav.show{
+    right: 0;
+  }
+  nav.show ~ #overlay{
+    display: block;
+  }
+  nav ul{
+    width: 100%;
+    flex-direction: column;
+  }
+  nav a{
+    width: 100%;
+    padding-left: 2.5em;
+  }
+
+
+  .homeProfile, .aboutProfile , .skillsProfile, .projectsProfile, .contactProfile{
+    padding-top: 0;
+    min-height: 70dvh;
+  }
+
+  #profileTitle{
+    font-size: 55px;
+  }
+
+
+  /* Home */
+  .homeProfile
+  #welcomeMessage{
+    font-size: 7dvh;
+  }
+  .homeContainer{
+    flex-direction: column;
+  }
+  #contactButtonContainer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  #contactButton{
+    font-size: 20px;
+    padding: 12px 12px;                                 
+  }
+  .homeSocial-icon svg{
+    gap: 1em;
+  }
+  #profilePicture img{
+    /* display: none;*/
+    height: 100%;
+    width: 100%;
+  }
+
+
+  /* about */
+  .aboutProfile{
+    font-size: 15px
+  }
+
+
+  /* Skills */
+  .skillsContainer{
+    
+  }
+  .skillsPorfileBoxes{
+    background-color: #0071FF;
+  }
+  .skillsListContainer{
+    max-height: 130dvh;
+    justify-content: end;
+  }
+  .skillsBoxes{
+    height: 55px;
+  }
+  .skillsBoxes svg{
+    height: 55px;
+    width: 55px;
+  }
+  .skillsBoxesTitle{
+    font-size: 13px;
+  }
+  
+
+
+  /* projects */
+  #projectsListImage{
+    height: 200px;
+    width: 300px;
+  }
+
+
+
+  /* contact */
+  
+
+
 }
