@@ -7,32 +7,36 @@ const projects = [
       id: 1,
       title: "Twitter Clone",
       image: "/images/projects/twitter-clone.png",
-      description: "Twitter Clone - A full-stack social media app.",
+      description: " - A full-stack social media app.",
       link: 'https://zz-xi.vercel.app/'
    },
    {
       id: 2,
       title: "Discord Bot",
       image: "/images/projects/puniyo-bot.png",
-      description: "Discord Bot - A node.js bot for a discord server.",
+      description: " - Discord Bot - A node.js bot for a discord server.",
+      link: "https://github.com/rizeenroe/PuniyoDiscordBot"
    },
    {
       id: 3,
-      title: "Project 3",
+      title: "Japanese API",
       image: "/images/projects/japanese-api.png",
-      description: "API Development - A express rest API I use to review japanese, and also use it on the Discord Bot.",
+      description: " - A express rest API I use to review japanese, and also use it on the Discord Bot.",
+      link: "https://zen-japanese-api.vercel.app/"
    },
    {
       id: 4,
-      title: "Project 4",
+      title: "Chat System",
       image: "/images/projects/chat-system.png",
-      description: "Chat System - A Flask backend, and a React frontend that enables chatting between 1 user or more.",
+      description: " - A group project that uses Flask as a backend, and a React frontend that enables chatting between 1 user or more.",
+      link: "https://github.com/rizeenroe/Chat-System-Project-CPAN226"
    },
    {
       id: 5,
-      title: "Project 5",
-      image: "/images/projects/coming-soon.png",
-      description: "Coming Soon",
+      title: "Portfolio Website",
+      image: "/images/projects/portfolio-website.png",
+      description: " - A React Frontend application that shows my html, css, javascript capabilities",
+      link: "https://github.com/rizeenroe/ZenPortfolio"
    },
    {
       id: 6,
@@ -141,7 +145,7 @@ const Home = () => {
                   <div className='homeProfileInfo'>
                      <div className="homeProfileBoxes" id='welcomeMessage'>
                         {/* <h1 className='homeTitle'>Hi,<br></br>I'am <span className='titleName'>Rizeen Roe</span><br></br>Full Stack Developer</h1> */}
-                        <h1 className='homeTitle' id='welcomeMessage'>Hi, I'am <br></br><span className='titleName'>Rizeen Roe Peralta</span><br></br>Full Stack Developer</h1>
+                        <h1 className='homeTitle' id='welcomeMessage'>Hi, I am <br></br><span className='titleName'>Rizeen Roe Peralta</span><br></br>Full Stack Developer</h1>
                      </div>
                      <div className='homeProfileBoxes' id='contactButtonContainer'>
                         <a href='#contacts' id='profileContactButton'>
@@ -191,21 +195,21 @@ const Home = () => {
                   <div className='about-1'>
                      <h1 id='profileTitle'>About Me</h1>
                      <p>
-                     Hi, I'm Rizeen Roe Peralta, 
+                     Hi, I'm <strong>Rizeen Roe Peralta</strong>,
                      a passionate Full Stack Developer with a love for crafting seamless digital experiences.<br></br> 
                      I specialize in building robust web applications using React, Express.js, Spring Boot, and Firebase Firestore,<br></br> 
                      ensuring efficient backend logic and dynamic frontend interactions.
                      </p><br></br>
                      <p>
-                     Beyond coding, I also like playing video games and reading,<br></br> 
+                     Beyond coding, I also like playing video games and reading.<br></br> 
                      I am always on the lookout for new adventures in the tech world and beyond.<br></br> 
                      My curiosity drives me to constantly learn and innovate, whether it's developing a Discord bot,<br></br>
                      improving network programming skills, or exploring new frameworks.<br></br>               
                      </p><br></br>
                      <p>
-                     Currently, I'm working on exciting projects like a React + Flask chat system and<br></br> 
-                     continuously refining my skills in software security, API development, and database management.<br></br> 
-                     I believe in clean, scalable code, and I enjoy collaborating on meaningful projects that make an<br></br> 
+                     Currently, I'm working on exciting projects that involves building scalable web applications, optimizing backend performance, and enhancing user experience through responsive design. <br></br> 
+                     I'm also exploring deeper into cloud solutions and exploring cutting-edge technologies such as<br></br> 
+                     as AI integration and serverless architectures to create more efficient and future-proof solutions."<br></br> 
                      impact.               
                      </p><br></br>
                      <p>
@@ -464,7 +468,7 @@ const Home = () => {
             </section>
          </div>
          
-         
+
          <div
             className={`profileWrapper ${visibleWrappers.includes(3) ? "profileWrapper--visible" : ""}`}
             ref={(el) => (wrappersRef.current[3] = el)}
@@ -485,8 +489,8 @@ const Home = () => {
                            <img src={project.image} alt={project.title} id='projectsListImage'/>
                         </div>  
                         <div className='projectInfo'>
-                           
-                           <a href={project.link}>{project.description}  </a>
+                           <a href={project.link}>{project.title}</a>
+                           {project.description}
                         </div>
                         </div>
                         
@@ -498,7 +502,10 @@ const Home = () => {
                <div className="modal" onClick={closeModal}>
                   <span className="close">&times;</span>
                      <img className="modal-content" src={modalContent.image} alt={modalContent.title} />
-                     <div id="caption">{modalContent.description}</div>
+                     <div id="caption">
+                        <a href={modalContent.link}>{modalContent.title}</a>
+                        {modalContent.description}
+                     </div>
                </div>
                )}
             </section>
@@ -561,6 +568,7 @@ const Home = () => {
                               <ReCAPTCHA
                                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                                  onChange={handleCaptchaChange}
+                                 size="normal"
                               />
                            </div>
                            <div className="contactProfileBoxes" id="contactSendContainer">

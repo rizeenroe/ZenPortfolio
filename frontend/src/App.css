@@ -5,9 +5,6 @@
   --accent-color: #0071FF;
   --text-color: #c9c9c9;
 }
-@keyframes appear{
-  
-}
 *{
   margin: 0;
   padding: 0;
@@ -20,7 +17,7 @@ html{
   scroll-snap-type: y proximity;
 }
 body{
-  min-height: 100dvh;
+  min-height: 90dvh;
   background-color: var(--primary-color);
   scroll-behavior: smooth; 
 }
@@ -115,7 +112,9 @@ nav a.accent-link{
 }
 
 #profileTitle{
-  font-size: 4em
+  font-size: 4em;
+  color: white;
+  
 }
 
 
@@ -249,9 +248,15 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
 }
+.projectsListContainer a{
+  text-decoration: none;
+  color: #280e7f;
+}
+.projectsListContainer a:hover{
+  color: #3e19ba;
+}
 .projectProfileTitle{
   display: flex;
-  
 }
 .projectsProfileBoxes{
   position: relative;
@@ -380,7 +385,7 @@ button:hover {
 }
 
 .contactProfileBoxes textarea{
-  height: 400px;
+  height: 350px;
 }
 #contactTitle{
   font-size: 60px;
@@ -503,7 +508,6 @@ button:hover {
     gap: 1em;
   }
   #profilePicture img{
-    /* display: none;*/
     height: 100%;
     width: 100%;
   }
@@ -516,9 +520,6 @@ button:hover {
 
 
   /* Skills */
-  .skillsContainer{
-    
-  }
   .skillsPorfileBoxes{
     background-color: #0071FF;
   }
