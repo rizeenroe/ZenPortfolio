@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from "emailjs-com";
 
 const projects = [
    {
@@ -43,7 +44,12 @@ const Home = () => {
    const [modalOpen, setModalOpen] = useState(false);
    const [modalContent, setModalContent] = useState({});
    const [isSubmitted, setIsSubmitted] = useState(false);
-
+   const [formData, setFormData] = useState({
+       name: "",
+       email: "",
+       subject: "",
+       message: "",
+   });
    const openModal = (project) => {
       setModalContent(project);
       setModalOpen(true);
@@ -53,19 +59,32 @@ const Home = () => {
       setModalOpen(false);
    };
 
+   const handleChange = (e) => {
+      setFormData({
+         ...formData,
+         [e.target.name]: e.target.value
+      });
+   };
+
    const handleSubmit = (e) => {
-      e.preventDefault(); 
+      e.preventDefault();
 
-      setIsSubmitted(true);
+      console.log("🚀 Sending email with:", formData);
 
-      setTimeout(() => {
-          document.getElementById("contactForm").submit();
-      }, 1000);
+      emailjs.send(
+         process.env.REACT_APP_EMAILJS_SERVICE_ID,
+         process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+         formData,
+         process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then((result) => {
+         setIsSubmitted(true);
+         setFormData({ name: "", email: "", subject: "", message: "" });
+      })
+      .catch((error) => console.error("Email error:", error));
 
-      setTimeout(() => {
-         setIsSubmitted(false);
-     }, 3000);
-  };
+      setTimeout(() => setIsSubmitted(false), 3000);
+   };
 
    return(
       <main>
@@ -418,71 +437,67 @@ const Home = () => {
          </section>
 
 
-         <section className='contactProfile' id='contacts'>
-            
-               <div className='contactContainer'>
-                  <form 
-                     id="contactForm"
-                     action="mailto:rizeenroe@zenportfolio.net" 
-                     method="post" 
-                     encType="text/plain"
-                     onSubmit={handleSubmit}
-                  >
-                     <div>
-                        <h1 id='profileTitle'>Contact</h1>
-                     </div>
-                     <div className='contactListContainer'>
-                        <div className='contactProfileBoxes'>
-                           <input 
-                                 className='senderName' 
-                                 name="Name" 
-                                 placeholder='Your Name' 
-                                 required
-                           />
-                        </div>
-                        <div className='contactProfileBoxes'>
-                           <input 
-                                 className='senderEmail' 
-                                 name="Email" 
-                                 type="email" 
-                                 placeholder='Your Email' 
-                                 required
-                           />
-                        </div>
-                        <div className='contactProfileBoxes'>
-                            <input 
-                                className='senderSubject' 
-                                name="Subject" 
-                                placeholder='Subject' 
+         <section className="contactProfile" id="contacts">
+            <div className="contactContainer">
+                <form id="contactForm" onSubmit={handleSubmit}>
+                    <div>
+                        <h1 id="profileTitle">Contact</h1>
+                    </div>
+                    <div className="contactListContainer">
+                        <div className="contactProfileBoxes">
+                            <input
+                                className="senderName"
+                                name="name"
+                                placeholder="Your Name"
+                                value={formData.name}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
-                        <div className='contactProfileBoxes'>
-                           <textarea 
-                                 className='senderMessage' 
-                                 name="Message" 
-                                 placeholder='Your Message' 
-                                 required
-                           ></textarea>
+                        <div className="contactProfileBoxes">
+                            <input
+                                className="senderEmail"
+                                name="email"
+                                type="email"
+                                placeholder="Your Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
-                        <div className='contactProfileBoxes' id='contactSendContainer' style={{ gridArea: 'contactBox-5' }}>
-                           <input 
-                                 className='contactSendButton' 
-                                 type="submit" 
-                                 value="Send"
-                           />
+                        <div className="contactProfileBoxes">
+                            <input
+                                className="senderSubject"
+                                name="subject"
+                                placeholder="Subject"
+                                value={formData.subject}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
-                     </div>
-                  </form>
-               </div>
-            
-            {/* Pop-up confirmation message */}
+                        <div className="contactProfileBoxes">
+                            <textarea
+                                className="senderMessage"
+                                name="message"
+                                placeholder="Your Message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                required
+                            ></textarea>
+                        </div>
+                        <div className="contactProfileBoxes" id="contactSendContainer">
+                            <input className="contactSendButton" type="submit" value="Send" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             {isSubmitted && (
                 <div className="popup">
                     <p>Message Sent Successfully!</p>
                 </div>
             )}
-         </section>
+        </section>
 
 
       </main>

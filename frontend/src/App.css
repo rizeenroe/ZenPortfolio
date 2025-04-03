@@ -127,7 +127,7 @@ nav a.accent-link{
 }
 
 #profileTitle{
-  font-size: 90px
+  font-size: 5em
 }
 
 
@@ -265,8 +265,8 @@ button:hover {
   padding: 0.5rem;
 }
 #projectsListImage{
-  height: 250px;
-  width: 350px;
+  height: 30dvh;
+  width: 20dvw;
 }
 .projectsProfileBoxes img {
   width: 100%;
