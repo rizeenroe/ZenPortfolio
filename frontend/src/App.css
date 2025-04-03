@@ -17,7 +17,7 @@ html{
   scroll-behavior: smooth;
   font-family: Poppins, 'Segoe UI', sans-serif;
   color: var(--text-color);
-  /* scroll-snap-type: y mandatory; */
+  scroll-snap-type: y proximity;
 }
 body{
   min-height: 100dvh;
@@ -27,6 +27,7 @@ body{
 }
 main{
   padding: min(5em, 7%);
+  
 }
 main p{
   margin-top: .35em;
@@ -106,8 +107,20 @@ nav a.accent-link{
 } */
 
 
+section{
+  scroll-snap-align: start;
+  
+}
+.profileWrapper {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
 
-
+.profileWrapper--visible {
+  transform: translateY(0);
+  opacity: 1;
+}
 .homeProfile, .aboutProfile , .skillsProfile, .projectsProfile, .contactProfile{
   padding-top: 25px;
   padding: 1rem;
@@ -119,7 +132,10 @@ nav a.accent-link{
   /* animation: appear linear;
   animation-timeline: view();
   animation-range: entry 0% cover 40%;   */
+
+  
 }
+
 
 .aboutContainer, .skillsContainer, .projectsContainer, .contactContainer{
   width: 100dvh;
