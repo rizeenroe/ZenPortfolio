@@ -21,7 +21,6 @@ html{
 }
 body{
   min-height: 100dvh;
-  min-height: 100dvh;
   background-color: var(--primary-color);
   scroll-behavior: smooth; 
 }
@@ -89,24 +88,6 @@ nav a.accent-link{
 }
 
 
-
-  /* .homeProfile{
-    background-color: #0056b3;
-  } */
-/* .aboutProfile{
-  background-color: red;
-} */
-/* .skillsProfile{
-  background-color: white;
-} */
-/* .projectsProfile{
-  background-color: yellow;
-} */
-/* .contactProfile{
-  background-color: green;
-} */
-
-
 section{
   scroll-snap-align: start;
   
@@ -128,12 +109,6 @@ section{
   display: flex;
   align-items: center ;
   justify-content: center;
-  /* scroll-snap-align: center; */
-  /* animation: appear linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 40%;   */
-
-  
 }
 
 
@@ -143,7 +118,7 @@ section{
 }
 
 #profileTitle{
-  font-size: 5em
+  font-size: 4em
 }
 
 
@@ -153,7 +128,6 @@ section{
   flex-direction: row;
 }
 .homeProfileBoxes{
-  /* background-color: #535353;  */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -468,6 +442,9 @@ button:hover {
 
 
 @media screen and (max-width: 700px) {
+  html{
+    scroll-snap-type: none;
+  }
   #open-sidebar-button, #close-sidebar-button{
     display: block;
   }
