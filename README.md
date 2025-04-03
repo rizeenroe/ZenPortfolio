@@ -60,6 +60,7 @@ This project is open-source and available under the [MIT License](LICENSE).
 ## Special Thanks To
 
 - **[Coding2Go](https://www.youtube.com/@coding2go)** for providing helpful tutorials and guidance throughout the development of this project.
+- **[SvgRepo](https://www.svgrepo.com/)** for providing easy to edit and use SVG files.
 - **My friends** for their encouragement and feedbacks throughout this project.
 
 Thank you for taking the time to explore my portfolio!
