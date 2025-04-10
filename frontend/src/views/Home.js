@@ -48,7 +48,6 @@ const projects = [
 
 const Home = () => {
    const [modalOpen, setModalOpen] = useState(false);
-   const [modalContent, setModalContent] = useState({});
    const [isSubmitted, setIsSubmitted] = useState(false);
    const [captchaValue, setCaptchaValue] = useState(null);
    const [showCaptcha, setShowCaptcha] = useState(false);
@@ -62,20 +61,7 @@ const Home = () => {
       message: "",
    });
 
-   //modal
-   const closeModal = () => {
-      setModalOpen(false);
-   };
-   const openModal = (project) => {
-      setModalOpen(true);
-   };
-
    
-
-
-
-
-   //emailJS
    const handleChange = (e) => {
       setFormData({
          ...formData,
@@ -120,7 +106,6 @@ const Home = () => {
 
    
 
-   //appear effect
    useEffect(() => {
       const handleScroll = () => {
       wrappersRef.current.forEach((wrapper, index) => {
@@ -514,17 +499,6 @@ const Home = () => {
                      ))}
                   </div>
                </div>
-               
-               {modalOpen && (
-               <div className="modal">
-                  <span className="close">&times;</span>
-                     <img className="modal-content" src={modalContent.image} alt={modalContent.title} />
-                     <div id="caption">
-                        <a href={modalContent.link}>{modalContent.title}</a>
-                        {modalContent.description}
-                     </div>
-               </div>
-               )}
             </section>
          </div>
          
