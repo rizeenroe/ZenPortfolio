@@ -7,35 +7,35 @@ const projects = [
       id: 1,
       title: "Twitter Clone",
       image: "/images/projects/twitter-clone.png",
-      description: " - A full-stack social media app.",
+      description: "A full-stack social media app.",
       link: 'https://zz-xi.vercel.app/'
    },
    {
       id: 2,
       title: "Discord Bot",
       image: "/images/projects/puniyo-bot.png",
-      description: " - Discord Bot - A node.js bot for a discord server.",
+      description: "Discord Bot - A node.js bot for a discord server.",
       link: "https://github.com/rizeenroe/PuniyoDiscordBot"
    },
    {
       id: 3,
       title: "Japanese API",
       image: "/images/projects/japanese-api.png",
-      description: " - A express rest API I use to review japanese, and also use it on the Discord Bot.",
+      description: "A express rest API I use to review japanese, and also use it on the Discord Bot.",
       link: "https://zen-japanese-api.vercel.app/"
    },
    {
       id: 4,
       title: "Chat System",
       image: "/images/projects/chat-system.png",
-      description: " - A group project that uses Flask as a backend, and a React frontend that enables chatting between 1 user or more.",
+      description: "A group project that uses Flask as a backend, and a React frontend that enables chatting between 1 user or more.",
       link: "https://github.com/rizeenroe/Chat-System-Project-CPAN226"
    },
    {
       id: 5,
       title: "Portfolio Website",
       image: "/images/projects/portfolio-website.png",
-      description: " - A React Frontend application that shows my html, css, javascript capabilities",
+      description: "A React Frontend application that shows my html, css, javascript capabilities",
       link: "https://github.com/rizeenroe/ZenPortfolio"
    },
    {
@@ -46,12 +46,63 @@ const projects = [
    },
 ];
 
+const skills = [
+   {
+      title: ["JavaScript", "Express"],
+      image: "/images/skills/js.png",
+   },
+   {
+      title: ["TypeScript"],
+      image: "/images/skills/typescript.png",
+   },
+   {
+      title: ["React Native", "React"],
+      image: "/images/skills/react.png",
+   },
+   {
+      title: ["FireBase"],
+      image: "/images/skills/firebase.png",
+   },
+   {
+      title: ["Java"],
+      image: "/images/skills/java.png",
+   },
+   {
+      title: ["Pyhton"],
+      image: "/images/skills/python.png",
+   },
+   {
+      title: ["Html"],
+      image: "/images/skills/html.png",
+   },
+   {
+      title: ["CSS"],
+      image: "/images/skills/css.png",
+   },
+   {
+      title: ["C#"],
+      image: "/images/skills/csharp.png",
+   },
+   {
+      title: ["SQL"],
+      image: "/images/skills/sql.png",
+   },
+   {
+      title: ["GdScript"],
+      image: "/images/skills/godot.png",
+   },
+   {
+      title: ["Git"],
+      image: "/images/skills/github.png   ",
+   },
+];
 const Home = () => {
    const [isSubmitted, setIsSubmitted] = useState(false);
    const [captchaValue, setCaptchaValue] = useState(null);
    const [showCaptcha, setShowCaptcha] = useState(false);
    const [captchaReadyToSubmit, setCaptchaReadyToSubmit] = useState(false);
    const [visibleWrappers, setVisibleWrappers] = useState([]);
+   const [selectedProject, setSelectedProject] = useState(null);
    const wrappersRef = useRef([]);
    const [formData, setFormData] = useState({
       name: "",
@@ -59,6 +110,7 @@ const Home = () => {
       subject: "",
       message: "",
    });
+   
 
    
    const handleChange = (e) => {
@@ -135,11 +187,19 @@ const Home = () => {
       );
    }
 
-
+   const openModal = (project) => {
+      setSelectedProject(project);
+   };
+   
+   const closeModal = () => {
+      setSelectedProject(null);
+   };
+    
    return(
       <main>
          <div
             className={`profileWrapper ${visibleWrappers.includes(0) ? "profileWrapper--visible" : ""}`}
+            id='profileNoTransform'
             ref={(el) => (wrappersRef.current[0] = el)}
          >
             <section className="homeProfile" id="home" >
@@ -241,7 +301,7 @@ const Home = () => {
                      <h1 id='profileTitle'>My Skills</h1>
                   </div>
                      <div className='skillsListContainer'>
-                        <div className="skillsBoxes">
+                        {/* <div className="skillsBoxes">
                               <div>
                                  <svg
                                  width="100"
@@ -472,13 +532,26 @@ const Home = () => {
                                  <h1>C#</h1>
                               </div>
                            </div>
-                        </div>
+                        </div> */}
+                        {skills.map((skill, index) => (
+                           <div key={index} className='skillsBoxes'>
+                              <div>
+                                 <img src={skill.image} alt={`${skill.id}-icon`} id={index} />
+                              </div>
+                              <div className='skillsBoxesTitle'>
+                                 {skill.title.map((title, index) => (
+                                    <div key={index}>
+                                       <h2>{title}</h2>
+                                    </div>
+                                 ))}
+                              </div>
+                           </div>
+                        ))}
                      </div>
                </div>
             </section>
          </div>
          
-
          <div
             className={`profileWrapper ${visibleWrappers.includes(3) ? "profileWrapper--visible" : ""}`}
             ref={(el) => (wrappersRef.current[3] = el)}
@@ -487,22 +560,21 @@ const Home = () => {
                <div className='projectsContainer'>
                   <div className='projectProfileTitle'>
                      <h1 id='profileTitle'>My Projects</h1>
-                  </div>
+                  </div> 
                   <div className='projectsListContainer'>
                      {projects.map((project) => (
                         <div
                            key={project.id}
                            className="projectsProfileBoxes"
+                           onClick={() => openModal(project)}
                         >
-                        <div>
-                           <img src={project.image} alt={project.title} id='projectsListImage'/>
-                        </div>  
-                        <div className='projectInfo'>
-                           <a href={project.link}>{project.title}</a>
-                           {project.description}
+                           <div>
+                              <img src={project.image} alt={project.title} id='projectsListImage'/>
+                           </div>  
+                           <div className='projectInfo'>
+                              <a href={project.link}>{project.title}</a> - {project.description}
+                           </div>
                         </div>
-                        </div>
-                        
                      ))}
                   </div>
                </div>
@@ -587,8 +659,18 @@ const Home = () => {
             </section>
          </div>
 
-         
-
+         {/* modal popup */}
+         {selectedProject && (
+            <div className="modalOverlay" onClick={closeModal}>
+               <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+                  <button className="closeButton" onClick={closeModal}>×</button>
+                  <h2>{selectedProject.title}</h2>
+                  <img src={selectedProject.image} alt={selectedProject.title} className="modalImage" />
+                  <p>{selectedProject.description}</p>
+                  <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">Visit Project</a>
+               </div>
+            </div>
+         )}
 
       </main>
   );
