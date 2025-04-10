@@ -99,7 +99,7 @@ h1{
 }
 
 #profileNoTransform{
-  transform: translateY(0px);
+  transform: translateY(0);
 }
 
 .profileWrapper--visible {
