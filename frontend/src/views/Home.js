@@ -51,6 +51,8 @@ const Home = () => {
    const [modalContent, setModalContent] = useState({});
    const [isSubmitted, setIsSubmitted] = useState(false);
    const [captchaValue, setCaptchaValue] = useState(null);
+   const [showCaptcha, setShowCaptcha] = useState(false);
+   const [captchaReadyToSubmit, setCaptchaReadyToSubmit] = useState(false);
    const [visibleWrappers, setVisibleWrappers] = useState([]);
    const wrappersRef = useRef([]);
    const [formData, setFormData] = useState({
@@ -60,15 +62,20 @@ const Home = () => {
       message: "",
    });
 
-   const openModal = (project) => {
-      setModalContent(project);
-      setModalOpen(true);
-   };
-
+   //modal
    const closeModal = () => {
       setModalOpen(false);
    };
+   const openModal = (project) => {
+      setModalOpen(true);
+   };
 
+   
+
+
+
+
+   //emailJS
    const handleChange = (e) => {
       setFormData({
          ...formData,
@@ -78,11 +85,13 @@ const Home = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+   
       if (!captchaValue) {
-         alert("Please complete the CAPTCHA");
+         setShowCaptcha(true);
+         setCaptchaReadyToSubmit(true); 
          return;
       }
-
+   
       emailjs.send(
          process.env.REACT_APP_EMAILJS_SERVICE_ID,
          process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
@@ -92,17 +101,26 @@ const Home = () => {
       .then((result) => {
          setIsSubmitted(true);
          setFormData({ name: "", email: "", subject: "", message: "" });
+         setCaptchaValue(null);
+         setShowCaptcha(false);
       })
       .catch((error) => console.error("Email error:", error));
-
+   
       setTimeout(() => setIsSubmitted(false), 3000);
    };
 
    const handleCaptchaChange = (value) => {
       setCaptchaValue(value);
+   
+      if (captchaReadyToSubmit) {
+         handleSubmit({ preventDefault: () => {} }); 
+         setCaptchaReadyToSubmit(false); 
+      }
    };
 
+   
 
+   //appear effect
    useEffect(() => {
       const handleScroll = () => {
       wrappersRef.current.forEach((wrapper, index) => {
@@ -483,7 +501,6 @@ const Home = () => {
                         <div
                            key={project.id}
                            className="projectsProfileBoxes"
-                           onClick={() => openModal(project)}
                         >
                         <div>
                            <img src={project.image} alt={project.title} id='projectsListImage'/>
@@ -499,7 +516,7 @@ const Home = () => {
                </div>
                
                {modalOpen && (
-               <div className="modal" onClick={closeModal}>
+               <div className="modal">
                   <span className="close">&times;</span>
                      <img className="modal-content" src={modalContent.image} alt={modalContent.title} />
                      <div id="caption">
@@ -565,11 +582,14 @@ const Home = () => {
                               ></textarea>
                            </div>
                            <div className="contactProfileBoxes">
+                           {showCaptcha && (
                               <ReCAPTCHA
                                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                                  onChange={handleCaptchaChange}
                                  size="normal"
                               />
+                           )}
+
                            </div>
                            <div className="contactProfileBoxes" id="contactSendContainer">
                               <input className="contactSendButton" type="submit" value="Send" />

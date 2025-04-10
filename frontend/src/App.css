@@ -233,15 +233,6 @@ button:hover {
 
 
 /* Porjects */
-/* .projectsContainer{
-  display: grid;
-  grid-template-columns: 500px 500px 500px;
-  grid-template-rows: 300px 300px 300px;
-  gap: 1em;
-  grid-template-areas: 
-    "projectBox-1 projectBox-2 projectBox-3"
-    "projectBox-4 projectBox-5 projectBox-6";
-} */
 .projectsListContainer{
   display: flex;
   flex-direction: row;
@@ -293,9 +284,19 @@ button:hover {
 }
 
 
- 
+
+
+/* modal 2.0 */
+
+
+
+
 
 /* image modal */
+/* body.no-scroll {
+  overflow: hidden;
+}
+
 .projectsProfileBoxes:hover img {
   opacity: 0.7;
 }
@@ -339,7 +340,7 @@ button:hover {
   color: #bbb;
 }
 
-/* Animation */
+Animation
 @keyframes zoom {
   from {
     transform: scale(0);
@@ -347,7 +348,7 @@ button:hover {
   to {
     transform: scale(1);
   }
-}
+} */
 
 
 
@@ -358,24 +359,14 @@ button:hover {
 
 
 /* Contact */
-/* .contactContainer {
-  display: grid;
-  grid-template-columns: 700px;
-  grid-template-rows: 100px 100px 100px 500px 100px;
-  gap: 3em; 
-  grid-template-areas: 
-    "contactBox-1"
-    "contactBox-2"
-    "contactBox-3"
-    "contactBox-4"
-    "contactBox-5";
-} */
 .contactContainer{
   gap: 3em;
 }
 .contactListContainer{
   flex-direction: column;
   justify-content: space-between;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 .contactProfileBoxes{
   /* background-color: #0022ff; */
@@ -437,6 +428,7 @@ button:hover {
   text-align: center;
   font-size: 18px;
 }
+
 
 
 
