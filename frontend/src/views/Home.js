@@ -47,7 +47,6 @@ const projects = [
 ];
 
 const Home = () => {
-   const [modalOpen, setModalOpen] = useState(false);
    const [isSubmitted, setIsSubmitted] = useState(false);
    const [captchaValue, setCaptchaValue] = useState(null);
    const [showCaptcha, setShowCaptcha] = useState(false);
