@@ -196,27 +196,35 @@ const Home = () => {
                <div className='aboutContainer'>
                   <div className='about-1'>
                      <h1 id='profileTitle'>About Me</h1>
-                     <p>
-                     Hi, I'm <strong>Rizeen Roe Peralta</strong>,
-                     a passionate Full Stack Developer with a love for crafting seamless digital experiences.<br></br> 
-                     I specialize in building robust web applications using React, Express.js, Spring Boot, and Firebase Firestore,<br></br> 
-                     ensuring efficient backend logic and dynamic frontend interactions.
-                     </p><br></br>
-                     <p>
-                     Beyond coding, I also like playing video games and reading.<br></br> 
-                     I am always on the lookout for new adventures in the tech world and beyond.<br></br> 
-                     My curiosity drives me to constantly learn and innovate, whether it's developing a Discord bot,<br></br>
-                     improving network programming skills, or exploring new frameworks.<br></br>               
-                     </p><br></br>
-                     <p>
-                     Currently, I'm working on exciting projects that involves building scalable web applications, optimizing backend performance, and enhancing user experience through responsive design. <br></br> 
-                     I'm also exploring deeper into cloud solutions and exploring cutting-edge technologies such as<br></br> 
-                     as AI integration and serverless architectures to create more efficient and future-proof solutions."<br></br> 
-                     impact.               
-                     </p><br></br>
-                     <p>
-                     Let's connect and build something amazing together!         
-                     </p><br></br>
+                     <div className='aboutMeContent'>
+                        <p>
+                           I was born in the Philippines into a financially stable but humble family. 
+                           As I grew up, I witnessed the sacrifices my parents made to ensure we had a better future.
+                           Their hard work and determination has given me the opportunity to grow, explore, and chase our dreams. 
+                           That journey shaped a lot of who I am today—resilient, curious, and always striving for more.
+                        </p><br></br>
+                        <p>
+                           I am a passionate Web Developer with a love for crafting seamless digital experiences. 
+                           I specialize in building web applications using React, Express.js, Spring Boot, and Firebase Firestore, 
+                           ensuring efficient backend logic and dynamic frontend interactions.
+                        </p><br></br>
+                        <p>
+                           Beyond coding, I also like playing video games and reading. 
+                           I am always on the lookout for new adventures in the tech world and beyond. 
+                           My curiosity drives me to constantly learn and innovate, whether it's developing a Discord bot,
+                           improving network programming skills, or exploring new frameworks.               
+                        </p><br></br>
+                        {/* <p>
+                        Currently, I'm working on exciting projects that involves building scalable web applications, optimizing backend performance, and enhancing user experience through responsive design. <br></br> 
+                        I'm also exploring deeper into cloud solutions and exploring cutting-edge technologies such
+                        as AI integration and serverless architectures to create more efficient and future-proof solutions. 
+                        impact.               
+                        </p> */}
+                        <p>
+                        Let's connect and build something amazing together!         
+                        </p>
+                     </div>
+                     
                   </div>
                </div>
             </section>

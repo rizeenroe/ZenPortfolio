@@ -179,6 +179,9 @@ button:hover {
 .aboutProfile{
   font-size: 20px
 }
+.aboutMeContent{
+  max-width: 80%;
+}
 
 
 
