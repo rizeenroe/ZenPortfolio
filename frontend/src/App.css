@@ -95,7 +95,7 @@ h1{
   scroll-snap-align: start;
   transform: translateY(20px);
   opacity: 0;
-  transition: transform 1s ease, opacity 1s ease;
+  transition: transform 1s ease, opacity 1s ease;   
 }
 
 #profileNoTransform{
@@ -587,7 +587,7 @@ Animation
   .skillsBoxes{
     height: 55px;
   }
-  .skillsBoxes svg{
+  .skillsBoxes img{
     height: 55px;
     width: 55px;
   }

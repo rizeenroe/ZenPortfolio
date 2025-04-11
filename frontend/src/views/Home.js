@@ -274,12 +274,6 @@ const Home = () => {
                            My curiosity drives me to constantly learn and innovate, whether it's developing a Discord bot,
                            improving network programming skills, or exploring new frameworks.               
                         </p><br></br>
-                        {/* <p>
-                        Currently, I'm working on exciting projects that involves building scalable web applications, optimizing backend performance, and enhancing user experience through responsive design. <br></br> 
-                        I'm also exploring deeper into cloud solutions and exploring cutting-edge technologies such
-                        as AI integration and serverless architectures to create more efficient and future-proof solutions. 
-                        impact.               
-                        </p> */}
                         <p>
                         Let's connect and build something amazing together!         
                         </p>
